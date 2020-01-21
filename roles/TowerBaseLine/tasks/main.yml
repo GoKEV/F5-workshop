@@ -1,0 +1,4 @@
+---
+- include: tower_settings.yml
+- include: tower_packages.yml
+- include: remove_defaults.yml

@@ -1,0 +1,13 @@
+- name: Variable examples
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    my_message: This is the default message set in the playbook.
+    my_name: Default Name
+    my_email: default@email.address
+
+  tasks:
+  - name: print out a paragraph using our variables
+    debug:
+      msg: "Hi.  My name is {{ my_name }} and my email is {{ my_email }}.  If I could say one thing to the world, it would be: {{ my_message }}"

@@ -1,0 +1,11 @@
+---
+limelight_deck_basepath: /var/www/html
+limelight_deck_boltonpath: "{{ limelight_deck_basepath }}/deck-ansible/html_slides"
+limelight_deck_boltonlabs: true
+
+#workshop_image: images/ansible-logo.png
+workshop_image: images/RedHatAutomation.png
+workshop_name: Ansible Tower Essentials Workshop
+workshop_presenter: '&nbsp;'
+workshop_title: '&nbsp;'
+workshop_message: '&nbsp;'

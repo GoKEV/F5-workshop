@@ -1,0 +1,8 @@
+[rhpdstower]
+student1.37fa.rhdemo.io ansible_host=34.204.48.254 ansible_ssh_user=student1 tower_pass=student1
+student2.37fa.rhdemo.io ansible_host=54.87.38.142 ansible_ssh_user=student2 tower_pass=student2
+student3.37fa.rhdemo.io ansible_host=34.228.144.244 ansible_ssh_user=student3 tower_pass=student3
+
+[rhpdstower:vars]
+ansible_ssh_pass=ansible
+tower_user=admin

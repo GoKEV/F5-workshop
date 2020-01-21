@@ -1,0 +1,51 @@
+- name: Insert the new job template
+  uri:
+    url: https://localhost/api/v2/job_templates/
+    validate_certs: no
+    method: POST
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+    status_code: 201
+    body: |
+      {
+          "name": "01 Variables",
+          "description": "Lab one excercise showing how we can use variables to modify the behavior of our playbook",
+          "job_type": "run",
+          "inventory": {{ new_inventory_id }},
+          "project": {{ new_project_id }},
+          "playbook": "01-Variables/variables.yml",
+          "forks": 0,
+          "limit": "",
+          "verbosity": 0,
+          "extra_vars": "---\nmy_message: This message is set inside the Ansible Tower job template but can be changed.\nmy_name: Ansible Tower User\nmy_email: email.ansible.tower",
+          "job_tags": "",
+          "force_handlers": false,
+          "skip_tags": "",
+          "start_at_task": "",
+          "timeout": 0,
+          "use_fact_cache": false,
+          "host_config_key": "",
+          "ask_diff_mode_on_launch": false,
+          "ask_variables_on_launch": false,
+          "ask_limit_on_launch": false,
+          "ask_tags_on_launch": false,
+          "ask_skip_tags_on_launch": false,
+          "ask_job_type_on_launch": false,
+          "ask_verbosity_on_launch": false,
+          "ask_inventory_on_launch": false,
+          "ask_credential_on_launch": false,
+          "survey_enabled": false,
+          "become_enabled": true,
+          "diff_mode": false,
+          "allow_simultaneous": false,
+          "custom_virtualenv": null,
+          "job_slice_count": 1,
+          "credential": {{ new_machine_credential_id }},
+          "vault_credential": {{ new_vault_credential_id }}
+      }
+#  ignore_errors: yes
+#  no_log: True
+#  failed_when: False
+#  changed_when: False

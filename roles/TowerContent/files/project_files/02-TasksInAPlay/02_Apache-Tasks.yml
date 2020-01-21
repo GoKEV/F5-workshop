@@ -1,0 +1,20 @@
+- name: Variable examples
+  hosts: web
+  become: true
+
+  tasks:
+  - name: Ensure httpd package is present
+    yum:
+      name: httpd
+      state: latest
+
+  - name: Ensure latest index.html file is present
+    copy:
+      src: files/index.html
+      dest: /var/www/html/
+
+  - name: Restart httpd
+    service:
+      name: httpd
+      state: restarted
+

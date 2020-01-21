@@ -1,0 +1,77 @@
+---
+- name: Insert the RedHatROoT-Ansible-Demos project
+  uri:
+    url: https://localhost/api/v2/projects/
+    validate_certs: no
+    method: POST
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+    status_code: 201
+    body: |
+      {
+          "name": "RedHatROoT Ansible-Demos",
+          "description": "",
+          "scm_type": "git",
+          "scm_url": "https://github.com/redhatroot/ansible-demos.git",
+          "scm_branch": "",
+          "scm_clean": false,
+          "scm_delete_on_update": false,
+          "credential": null,
+          "timeout": 0,
+          "organization": "1",
+          "scm_update_on_launch": false,
+          "scm_update_cache_timeout": 0,
+          "custom_virtualenv": null
+      }
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+
+## If the project already existed, the output is different from the input. Instead we query again and parse the ID here.
+- name: Get ID from RedHatROoT-Ansible-Demos project ID
+  uri:
+    url: https://localhost/api/v2/projects/?name=RedHatROoT%20Ansible-Demos
+    validate_certs: no
+    method: GET
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: project_insert
+
+## Race condition can exist if we insert the job template before the yml file exists so we update it here
+- name: "Update the RedHatROoT-Ansible-Demos project ID {{ project_insert.json.results[0].url }}"
+  uri:
+    url: "https://localhost{{ project_insert.json.results[0].url }}update/"
+    validate_certs: no
+    method: POST
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+    status_code: 201
+    body: {}
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+
+## Race condition is eliminated by adding the UNTIL to the bottom here to make sure sync is complete
+- name: Get the default project template ID
+  uri:
+    url: https://localhost/api/v2/projects/?name=RedHatROoT%20Ansible-Demos
+    validate_certs: no
+    method: GET
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: project_insert
+  until:  project_insert.json.results[0].status == "successful"
+
+- set_fact:
+    new_ll_project_id: "{{ project_insert.json.results[0].id }}"
+

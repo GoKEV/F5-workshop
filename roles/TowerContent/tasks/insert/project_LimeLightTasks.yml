@@ -1,0 +1,69 @@
+- name: Assure our our LimeLight projects directory exists
+  file:
+    path: /var/lib/awx/projects/LimeLight_Labs
+    state: directory
+    owner: awx
+    group: awx
+
+- name: synchronize our LimeLight projects to a local dir
+  synchronize:
+    src: files/project_files/
+    dest: /var/lib/awx/projects/LimeLight_Labs/
+    delete: yes
+    recursive: yes
+    rsync_opts:
+      - "--no-motd"
+
+- name: set awx for ownership on our local project directory
+  file:
+    path: /var/lib/awx/projects/LimeLight_Labs/
+    owner: awx
+    group: awx
+
+- name: Insert the LimeLight_Labs project
+  uri:
+    url: https://localhost/api/v2/projects/
+    validate_certs: no
+    method: POST
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+    status_code: 201
+    body: |
+      {
+          "name": "LimeLight Ansible Tower Labs",
+          "description": "Pre-baked labs for the Ansible LimeLight Project",
+          "local_path": "LimeLight_Labs",
+          "scm_type": "",
+          "scm_url": "",
+          "scm_branch": "",
+          "scm_clean": false,
+          "scm_delete_on_update": false,
+          "credential": null,
+          "timeout": 0,
+          "organization": 1,
+          "scm_update_on_launch": false,
+          "scm_update_cache_timeout": 0,
+          "custom_virtualenv": null
+      }
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+
+## If the project already existed, the output is different from the input. Instead we query again and parse the ID here.
+- name: Get ID from RedHatROoT-Ansible-Demos project ID
+  uri:
+    url: https://localhost/api/v2/projects/?name=LimeLight%20Ansible%20Tower%20Labs
+    validate_certs: no
+    method: GET
+    user: "{{ tower_user }}"
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: project_insert
+
+- set_fact:
+    new_project_id: "{{ project_insert.json.results[0].id }}"
+

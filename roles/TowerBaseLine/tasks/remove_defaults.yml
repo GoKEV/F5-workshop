@@ -1,0 +1,130 @@
+---
+
+### INVENTORIES
+
+- name: Get all inventory IDs
+  uri:
+    url: https://localhost/api/v2/inventories/
+    validate_certs: no
+    method: GET
+    user: admin
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: all_inventory
+
+- name: Delete ALL Inventory
+  uri:
+    url: "https://localhost/api/v2/inventories/{{ invitem.id }}/"
+    validate_certs: no
+    method: DELETE
+    user: admin
+    password: "{{ tower_pass }}"
+    force_basic_auth: yes
+    status_code: 202
+    ignore_errors: yes
+  with_items: "{{ all_inventory.json.results }}"
+  loop_control:
+    label: "{{ invitem.id }}"
+    loop_var: invitem
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+
+### CREDENTIALS
+
+- name: Get all credential IDs
+  uri:
+    url: https://localhost/api/v2/credentials/
+    validate_certs: no
+    method: GET
+    user: admin
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: all_credentials
+
+- name: Delete ALL Credentials
+  uri:
+    url: "https://localhost/api/v2/credentials/{{ creditem.id }}/"
+    validate_certs: no
+    method: DELETE
+    user: admin
+    password: "{{ tower_pass }}"
+    force_basic_auth: yes
+    status_code: 202
+    ignore_errors: yes
+  with_items: "{{ all_credentials.json.results }}"
+  loop_control:
+    label: "{{ creditem.id }}"
+    loop_var: creditem
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+
+### JOB TEMPLATES
+
+- name: Get all job template IDs
+  uri:
+    url: https://localhost/api/v2/job_templates/
+    validate_certs: no
+    method: GET
+    user: admin
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: all_job_templates
+
+- name: Delete ALL job templates
+  uri:
+    url: "https://localhost/api/v2/job_templates/{{ jtitem.id }}/"
+    validate_certs: no
+    method: DELETE
+    user: admin
+    password: "{{ tower_pass }}"
+    force_basic_auth: yes
+    status_code: 202
+    ignore_errors: yes
+  with_items: "{{ all_job_templates.json.results }}"
+  loop_control:
+    label: "{{ jtitem.id }}"
+    loop_var: jtitem
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+
+### PROJECTS
+
+- name: Get the project IDs
+  uri:
+    url: https://localhost/api/v2/projects/
+    validate_certs: no
+    method: GET
+    user: admin
+    password: "{{ tower_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: all_projects
+
+- name: Delete ALL projects
+  uri:
+    url: "https://localhost/api/v2/projects/{{ projitem.id }}/"
+    validate_certs: no
+    method: DELETE
+    user: admin
+    password: "{{ tower_pass }}"
+    force_basic_auth: yes
+    status_code: 202
+    ignore_errors: yes
+  with_items: "{{ all_projects.json.results }}"
+  loop_control:
+    label: "{{ projitem.id }}"
+    loop_var: projitem
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+

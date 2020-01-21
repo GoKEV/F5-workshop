@@ -1,0 +1,23 @@
+---
+- name: EPEL
+  yum:
+    name: epel-release
+    state: present
+
+- name: PIP
+  yum:
+    name:
+      - python2-pip
+      - nano
+    state: present
+
+- name: nanorc template
+  template:
+    src: templates/nanorc
+    dest: /etc/nanorc
+    owner: root
+    group: root
+    mode: 0644
+
+- pip:
+    name: ansible-tower-cli
