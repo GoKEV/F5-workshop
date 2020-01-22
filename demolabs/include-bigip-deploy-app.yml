@@ -13,6 +13,8 @@
     host: "{{hostvars[item].ansible_host}}"
     name: "{{hostvars[item].inventory_hostname}}"
   loop: "{{ groups['webservers'] }}"
+  loop_control:
+    loop_var: loop_create_nodes
   when: app_exists == true
 
 - name: "CREATE POOL {{ app_poolname }}"
@@ -33,6 +35,8 @@
     port: "80"
     pool: "{{ app_poolname }}"
   loop: "{{ groups['webservers'] }}"
+  loop_control:
+    loop_var: loop_pool_members
   when: app_exists == true
 
 - name: "CREATE VIRTUAL SERVER {{ app_vipname }}"
