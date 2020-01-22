@@ -18,7 +18,7 @@
   loop: "{{ groups['webservers'] }}"
   loop_control:
     loop_var: loop_create_nodes
-  when: app_exists == true
+  when: app_exists
 
 - name: "CREATE POOL {{ app_poolname }}"
   bigip_pool:
@@ -27,7 +27,7 @@
     lb_method: "round-robin"
     monitors: "/Common/http"
     monitor_type: "and_list"
-  when: app_exists == true
+  when: app_exists
 
 - name: "ADD POOL MEMBERS to {{ app_poolname }}"
   bigip_pool_member:
@@ -40,7 +40,7 @@
   loop: "{{ groups['webservers'] }}"
   loop_control:
     loop_var: loop_pool_members
-  when: app_exists == true
+  when: app_exists
 
 - name: "CREATE VIRTUAL SERVER {{ app_vipname }}"
   bigip_virtual_server:
@@ -52,7 +52,7 @@
     all_profiles: ['http', 'clientssl', 'oneconnect']
     pool: "{{ app_poolname }}"
     snat: "Automap"
-  when: app_exists == true
+  when: app_exists
 
 - name: SAVE RUNNING CONFIGURATION
   bigip_config:
