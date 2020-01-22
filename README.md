@@ -8,6 +8,8 @@
 These are preconfigured projects, playbooks, credentials, job templates that bolt on top of an existing workshop.  The end result is a turnkey demo environment with working examples out of the box.
 
 
+## Summary - This project piggybacks on top of the F5 LinkLight Workshop for use as a repeatable demo
+
 ## Here's an example of how you could launch this process:
 <pre>
 ansible-playbook -i tower.hosts configurify.yml
