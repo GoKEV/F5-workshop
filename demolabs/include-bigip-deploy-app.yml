@@ -13,7 +13,7 @@
     host: "{{hostvars[item].ansible_host}}"
     name: "{{hostvars[item].inventory_hostname}}"
   loop: "{{ groups['webservers'] }}"
-  when: app_exists is true
+  when: app_exists == true
 
 - name: "CREATE POOL {{ app_poolname }}"
   bigip_pool:
@@ -22,7 +22,7 @@
     lb_method: "round-robin"
     monitors: "/Common/http"
     monitor_type: "and_list"
-  when: app_exists is true
+  when: app_exists == true
 
 - name: "ADD POOL MEMBERS to {{ app_poolname }}"
   bigip_pool_member:
@@ -33,7 +33,7 @@
     port: "80"
     pool: "{{ app_poolname }}"
   loop: "{{ groups['webservers'] }}"
-  when: app_exists is true
+  when: app_exists == true
 
 - name: "CREATE VIRTUAL SERVER {{ app_vipname }}"
   bigip_virtual_server:
@@ -45,7 +45,7 @@
     all_profiles: ['http', 'clientssl', 'oneconnect']
     pool: "{{ app_poolname }}"
     snat: "Automap"
-  when: app_exists is true
+  when: app_exists == true
 
 - name: SAVE RUNNING CONFIGURATION
   bigip_config:
