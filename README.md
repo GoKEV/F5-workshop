@@ -1,9 +1,14 @@
-[![RedHatROoT/ansible](https://avatars2.githubusercontent.com/u/2985831?s=460)](https://github.com/redhatroot/ansible/)
+[![RedHatROoT/ansible](https://avatars2.githubusercontent.com/u/2985831?s=100)](https://github.com/redhatroot/ansible/) 
+
+[![MattTheITGuru](https://avatars0.githubusercontent.com/u/22283700?s=100)](https://MattTheITGuru.com)
+
 
 <div style="position: absolute; top: 40px; left: 200px;">
 
 These are preconfigured projects, playbooks, credentials, job templates that bolt on top of an existing workshop.  The end result is a turnkey demo environment with working examples out of the box.
 
+
+## Summary - This project piggybacks on top of the F5 LinkLight Workshop for use as a repeatable demo
 
 ## Here's an example of how you could launch this process:
 <pre>
@@ -59,6 +64,6 @@ license_file: |
 
 ## Author
 
-This project was created in 2019 by [Kevin Holmes](http://GoKEV.com/).
+This project was created in 2020 by [Kevin Holmes](http://GoKEV.com/) and [Matt St. Onge](https://MattTheITGuru.com) 
 
 
