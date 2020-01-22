@@ -62,6 +62,6 @@ license_file: |
 
 ## Author
 
-This project was created in 2020 by [Kevin Holmes](http://GoKEV.com/) and [Matt St. Onge] (https://MattTheITGuru.com) 
+This project was created in 2020 by [Kevin Holmes](http://GoKEV.com/) and [Matt St. Onge](https://MattTheITGuru.com) 
 
 
