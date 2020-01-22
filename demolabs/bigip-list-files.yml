@@ -18,16 +18,16 @@
     register: rawfilenames
 
 
+  - name: debug raw filenames
+    debug: 
+      msg: "rawfilenames are {{ rawfilenames }}"
+
+
   - name: debug all filenames
     debug: 
       msg: "filenames are {{ filenames }}"
 
   - name: debug one filename
     debug: 
-      msg: "filenames.path is {{ filenames.path }}"
+      msg: "filenames.path is {{ filenames.files.path }}"
 
-
-
-  - name: debug raw filenames
-    debug: 
-      msg: "rawfilenames are {{ rawfilenames }}"
