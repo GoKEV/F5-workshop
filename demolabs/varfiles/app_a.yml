@@ -1,5 +1,5 @@
 ---
-app_poolname: Alpha Pool
-app_vipname: Alpha Vip
+app_poolname: AlphaPool
+app_vipname: AlphaVip
 app_portnum: 443
 
