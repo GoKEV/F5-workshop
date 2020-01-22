@@ -7,11 +7,11 @@
   tasks:
   - name: Use a single pattern that contains a comma formatted as a list
     raw: ls -1 ./varfiles/app_*yml
-    register: rawfilenames
+    register: filenames
 
-  - name: debug raw filenames
+  - name: debug filenames
     debug: 
-      msg: "rawfilenames are {{ rawfilenames }}"
+      msg: "filenames are {{ filenames }}"
 
   - name: debug one filename
     debug: 
