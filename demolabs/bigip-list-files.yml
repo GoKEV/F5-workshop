@@ -1,0 +1,24 @@
+---
+- name: BIG-IP SETUP
+  hosts: lb
+  connection: local
+  gather_facts: false
+
+  tasks:
+  - name: Use a single pattern that contains a comma formatted as a list
+    find:
+      paths: varfiles/app_a.yml
+      file_type: file
+      use_regex: yes
+      patterns: ['^app_.*yml$']
+    register: filenames
+
+
+
+  - name: debug all filenames
+    debug: 
+      msg: "filenames are {{ filenames }}"
+
+  - name: debug one filename
+    debug: 
+      msg: "filenames 1 is {{ filenames.0 }}"
