@@ -41,10 +41,10 @@
         pool: "{{ app_poolname }}"
       loop: "{{ groups['webservers'] }}"
 
-    - name: "ADD VIRTUAL SERVER to {{ app_vipname }}"
+    - name: "CREATE VIRTUAL SERVER {{ app_vipname }}"
       bigip_virtual_server:
         provider: "{{provider}}"
-        name: "{{ app_vipname }} "
+        name: "{{ app_vipname }}"
         destination: "{{private_ip}}"
         port: "{{ app_portnum }}"
         enabled_vlans: "all"
