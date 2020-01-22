@@ -13,6 +13,9 @@
       patterns: ['^app_.*yml$']
     register: filenames
 
+  - name: Use a single pattern that contains a comma formatted as a list
+    raw: ls -1 ./varfiles/
+    register rawfilenames
 
 
   - name: debug all filenames
@@ -21,4 +24,10 @@
 
   - name: debug one filename
     debug: 
-      msg: "filenames 1 is {{ filenames.0 }}"
+      msg: "filenames.path is {{ filenames.path }}"
+
+
+
+  - name: debug raw filenames
+    debug: 
+      msg: "rawfilenames are {{ rawfilenames }}"
