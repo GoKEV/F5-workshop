@@ -3,6 +3,8 @@
   hosts: lb
   connection: local
   gather_facts: false
+  vars_files:
+  - varfiles/app_a.yml
 
   tasks:
     - name: Setup provider
@@ -26,7 +28,7 @@
         - name: CREATE POOL
           bigip_pool:
             provider: "{{provider}}"
-            name: "http_pool"
+            name: "{{ app_poolname }}"
             lb_method: "round-robin"
             monitors: "/Common/http"
             monitor_type: "and_list"
@@ -38,18 +40,18 @@
             name: "{{hostvars[item].inventory_hostname}}"
             host: "{{hostvars[item].ansible_host}}"
             port: "80"
-            pool: "http_pool"
+            pool: "{{ app_poolname }}"
           loop: "{{ groups['webservers'] }}"
 
         - name: ADD VIRTUAL SERVER
           bigip_virtual_server:
             provider: "{{provider}}"
-            name: "vip"
+            name: "{{ app_vipname }} "
             destination: "{{private_ip}}"
-            port: "443"
+            port: "{{ app_portnum }}"
             enabled_vlans: "all"
             all_profiles: ['http', 'clientssl', 'oneconnect']
-            pool: "http_pool"
+            pool: "{{ app_poolname }}"
             snat: "Automap"
 
       rescue:
@@ -57,13 +59,13 @@
         - name: DELETE VIRTUAL SERVER
           bigip_virtual_server:
             provider: "{{provider}}"
-            name: "vip"
+            name: "{{ app_vipname }}"
             state: absent
 
         - name: DELETE POOL
           bigip_pool:
             provider: "{{provider}}"
-            name: "http_pool"
+            name: "{{ app_poolname }}"
             state: absent
 
         - name: DELETE NODES
