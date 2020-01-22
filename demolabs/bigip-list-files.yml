@@ -14,7 +14,7 @@
       msg: "filenames are {{ filenames }}"
 
   - name: loop one filename
-    include: announce-file.yml my_vip_varsfile="{{ item }}"
+    include: include-bigip-deploy-app.yml my_vip_varsfile="{{ item }}"
     with_items: "{{ filenames.stdout_lines }}"
 
 
