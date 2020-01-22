@@ -1,4 +1,4 @@
----
+\---
 - name: BIG-IP SETUP
   hosts: lb
   connection: local
@@ -16,66 +16,43 @@
           server_port: "8443"
           validate_certs: "no"
 
-    - name: SETUP AND GRACEFUL ROLLBACK BIG-IP CONFIGURATION
-      block:
-        - name: CREATE NODES
-          bigip_node:
-            provider: "{{provider}}"
-            host: "{{hostvars[item].ansible_host}}"
-            name: "{{hostvars[item].inventory_hostname}}"
-          loop: "{{ groups['webservers'] }}"
+    - name: CREATE NODES
+      bigip_node:
+        provider: "{{provider}}"
+        host: "{{hostvars[item].ansible_host}}"
+        name: "{{hostvars[item].inventory_hostname}}"
+      loop: "{{ groups['webservers'] }}"
 
-        - name: "CREATE POOL {{ app_poolname }}"
-          bigip_pool:
-            provider: "{{provider}}"
-            name: "{{ app_poolname }}"
-            lb_method: "round-robin"
-            monitors: "/Common/http"
-            monitor_type: "and_list"
+    - name: "CREATE POOL {{ app_poolname }}"
+      bigip_pool:
+        provider: "{{provider}}"
+        name: "{{ app_poolname }}"
+        lb_method: "round-robin"
+        monitors: "/Common/http"
+        monitor_type: "and_list"
 
-        - name: "ADD POOL MEMBERS to {{ app_poolname }}"
-          bigip_pool_member:
-            provider: "{{provider}}"
-            state: "present"
-            name: "{{hostvars[item].inventory_hostname}}"
-            host: "{{hostvars[item].ansible_host}}"
-            port: "80"
-            pool: "{{ app_poolname }}"
-          loop: "{{ groups['webservers'] }}"
+    - name: "ADD POOL MEMBERS to {{ app_poolname }}"
+      bigip_pool_member:
+        provider: "{{provider}}"
+        state: "present"
+        name: "{{hostvars[item].inventory_hostname}}"
+        host: "{{hostvars[item].ansible_host}}"
+        port: "80"
+        pool: "{{ app_poolname }}"
+      loop: "{{ groups['webservers'] }}"
 
-        - name: "ADD VIRTUAL SERVER to {{ app_vipname }}"
-          bigip_virtual_server:
-            provider: "{{provider}}"
-            name: "{{ app_vipname }} "
-            destination: "{{private_ip}}"
-            port: "{{ app_portnum }}"
-            enabled_vlans: "all"
-            all_profiles: ['http', 'clientssl', 'oneconnect']
-            pool: "{{ app_poolname }}"
-            snat: "Automap"
+    - name: "ADD VIRTUAL SERVER to {{ app_vipname }}"
+      bigip_virtual_server:
+        provider: "{{provider}}"
+        name: "{{ app_vipname }} "
+        destination: "{{private_ip}}"
+        port: "{{ app_portnum }}"
+        enabled_vlans: "all"
+        all_profiles: ['http', 'clientssl', 'oneconnect']
+        pool: "{{ app_poolname }}"
+        snat: "Automap"
 
-      rescue:
-
-        - name: "DELETE VIRTUAL SERVER {{ app_vipname }}"
-          bigip_virtual_server:
-            provider: "{{provider}}"
-            name: "{{ app_vipname }}"
-            state: absent
-
-        - name: "DELETE POOL {{ app_poolname }}"
-          bigip_pool:
-            provider: "{{provider}}"
-            name: "{{ app_poolname }}"
-            state: absent
-
-        - name: DELETE NODES
-          bigip_node:
-            provider: "{{provider}}"
-            name: "{{hostvars[item].inventory_hostname}}"
-            state: absent
-          loop: "{{ groups['webservers'] }}"
-      always:
-        - name: SAVE RUNNING CONFIGURATION
-          bigip_config:
-            provider: "{{provider}}"
-            save: true
+    - name: SAVE RUNNING CONFIGURATION
+      bigip_config:
+        provider: "{{provider}}"
+        save: true
