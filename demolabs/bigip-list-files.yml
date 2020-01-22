@@ -15,7 +15,7 @@
 
   - name: Use a single pattern that contains a comma formatted as a list
     raw: ls -1 ./varfiles/
-    register rawfilenames
+    register: rawfilenames
 
 
   - name: debug all filenames
