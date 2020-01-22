@@ -1,3 +1,6 @@
+- name: "include the variables from {{ my_vip_varsfile }}"
+  include_vars: "{{ my_vip_varsfile }}"
+
 - name: Setup provider
   set_fact:
     provider:
