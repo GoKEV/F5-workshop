@@ -13,8 +13,8 @@
 - name: CREATE NODES
   bigip_node:
     provider: "{{provider}}"
-    host: "{{hostvars[item].ansible_host}}"
-    name: "{{hostvars[item].inventory_hostname}}"
+    host: "{{hostvars[loop_create_nodes].ansible_host}}"
+    name: "{{hostvars[loop_create_nodes].inventory_hostname}}"
   loop: "{{ groups['webservers'] }}"
   loop_control:
     loop_var: loop_create_nodes
