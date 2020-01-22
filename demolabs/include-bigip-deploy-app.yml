@@ -54,7 +54,45 @@
     snat: "Automap"
   when: app_exists
 
+## DELETE GOES BELOW HERE
+- name: "DELETE VIRTUAL SERVER {{ app_vipname }}"
+  bigip_virtual_server:
+    provider: "{{provider}}"
+    name: "{{ app_vipname }}"
+    state: absent
+  when: not app_exists
+
+- name: "DELETE POOL {{ app_poolname }}"
+  bigip_pool:
+    provider: "{{provider}}"
+    name: "{{ app_poolname }}"
+    state: absent
+  when: not app_exists
+
+- name: DELETE NODES
+  bigip_node:
+    provider: "{{provider}}"
+    name: "{{hostvars[loop_del_hostvars].inventory_hostname}}"
+    state: absent
+  loop: "{{ groups['webservers'] }}"
+  loop_control:
+    loop_var: loop_del_hostvars
+  when: not app_exists
+
+
+
+
+
+
+
+
+
+
+
+
 - name: SAVE RUNNING CONFIGURATION
   bigip_config:
     provider: "{{provider}}"
     save: true
+
+
