@@ -16,7 +16,7 @@
   - name: loop one filename
     include_tasks: announce-file.yml
     vars:
-      my_vip_varsfile: {{ item }}
+      my_vip_varsfile: "{{ item }}"
     with_items: "{{ filenames.stdout_lines }}"
 
 
