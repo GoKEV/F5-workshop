@@ -25,7 +25,7 @@
             name: "{{hostvars[item].inventory_hostname}}"
           loop: "{{ groups['webservers'] }}"
 
-        - name: CREATE POOL
+        - name: "CREATE POOL {{ app_poolname }}"
           bigip_pool:
             provider: "{{provider}}"
             name: "{{ app_poolname }}"
@@ -33,7 +33,7 @@
             monitors: "/Common/http"
             monitor_type: "and_list"
 
-        - name: ADD POOL MEMBERS
+        - name: "ADD POOL MEMBERS to {{ app_poolname }}"
           bigip_pool_member:
             provider: "{{provider}}"
             state: "present"
@@ -43,7 +43,7 @@
             pool: "{{ app_poolname }}"
           loop: "{{ groups['webservers'] }}"
 
-        - name: ADD VIRTUAL SERVER
+        - name: "ADD VIRTUAL SERVER to {{ app_vipname }}"
           bigip_virtual_server:
             provider: "{{provider}}"
             name: "{{ app_vipname }} "
@@ -56,13 +56,13 @@
 
       rescue:
 
-        - name: DELETE VIRTUAL SERVER
+        - name: "DELETE VIRTUAL SERVER {{ app_vipname }}"
           bigip_virtual_server:
             provider: "{{provider}}"
             name: "{{ app_vipname }}"
             state: absent
 
-        - name: DELETE POOL
+        - name: "DELETE POOL {{ app_poolname }}"
           bigip_pool:
             provider: "{{provider}}"
             name: "{{ app_poolname }}"
