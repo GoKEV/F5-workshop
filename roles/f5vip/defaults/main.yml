@@ -1,0 +1,16 @@
+---
+# defaults file for f5vip
+
+vip_name: "http_vs"
+vip_port: "80"
+vip_ip: "10.168.68.105"
+
+#Pool memeber information
+pool_members:
+- port: "80"
+  host: "192.168.68.140"
+- port: "80"
+  host: "192.168.68.141"
+
+profiles:
+- http 

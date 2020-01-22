@@ -1,29 +1,6 @@
-- hosts: rhpdstower
+- hosts: ansible
   become: yes
-
-  vars:
-
-    license_file: |
-      {
-        "company_name": "TurnKeyDemos",
-        "contact_email": "kev@redhat.com",
-        "contact_name": "Kevin Holmes",
-        "features": {
-            "activity_streams": true,
-            "rebranding": true,
-            "surveys": true,
-            "system_tracking": true,
-            "workflows": true
-        },
-        "hostname": "abcdefghijklmnopqrstuvexyz1234567890",
-        "instance_count": 15,
-        "license_date": 1234567890,
-        "license_key": "abcdefghijklmnopqrstuvexyz1234567890abcdefghijklmnopqrstu",
-        "license_type": "basic",
-        "subscription_name": "TurnKeyDemos",
-        "eula_accepted": true
-      }
 
   roles:
     - TowerBaseLine
-#    - TowerContent
+    - TowerContent

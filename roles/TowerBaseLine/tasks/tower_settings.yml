@@ -1,16 +1,4 @@
 ---
-- name: Attach a license file
-  uri:
-    url: "https://localhost/api/v2/config/"
-    validate_certs: no
-    method: POST
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
-    body: "{{ license_file }}"
-    body_format: json
-    force_basic_auth: yes
-  changed_when: False
-
 - name: tower_cli.cfg file
   template:
     src: templates/tower_cli.cfg
