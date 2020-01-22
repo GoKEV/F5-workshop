@@ -78,7 +78,8 @@
   loop_control:
     loop_var: loop_del_hostvars
   when: not app_exists
-
+  ignore_errors: true
+  failed_when: no
 
 
 
