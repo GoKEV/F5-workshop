@@ -6,28 +6,14 @@
 
   tasks:
   - name: Use a single pattern that contains a comma formatted as a list
-    find:
-      paths: varfiles/
-      file_type: file
-      use_regex: yes
-      patterns: ['^app_.*yml$']
-    register: filenames
-
-  - name: Use a single pattern that contains a comma formatted as a list
-    raw: ls -1 ./varfiles/
+    raw: ls -1 ./varfiles/app_*yml
     register: rawfilenames
-
 
   - name: debug raw filenames
     debug: 
       msg: "rawfilenames are {{ rawfilenames }}"
 
-
-  - name: debug all filenames
-    debug: 
-      msg: "filenames are {{ filenames }}"
-
   - name: debug one filename
     debug: 
-      msg: "filenames.path is {{ filenames.files.path }}"
+      msg: "filenames.stdout_lines[0] is {{ filenames.stdout_lines[0] }}"
 
