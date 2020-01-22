@@ -16,4 +16,5 @@
   - name: debug one filename
     debug: 
       msg: "filenames.stdout_lines[0] is {{ filenames.stdout_lines[0] }}"
+    with_items: "{{ filenames.stdout_lines }}"
 
