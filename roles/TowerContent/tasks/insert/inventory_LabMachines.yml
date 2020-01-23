@@ -4,19 +4,19 @@
     url: https://localhost/api/v2/inventories/
     validate_certs: no
     method: POST
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
+    user: admin
+    password: "{{ ansible_password }}"
     body_format: json
     force_basic_auth: yes
     status_code: 201
     body: |
       {
-          "name": "Lab Instances",
+          "name": "Workshop Inventory",
           "description": "These are the instances populated automatically for you.",
           "organization": "1",
           "kind": "",
           "host_filter": null,
-          "variables": "---\nansible_password: 1234\nother_var: GoKEV",
+          "variables": "---\nansible_password: {{ ansible_password }}\nother_var: GoKEV",
           "insights_credential": null
       }
   ignore_errors: yes
@@ -29,8 +29,8 @@
     url: https://localhost/api/v2/inventories/?name=Lab%20Instances
     validate_certs: no
     method: GET
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
+    user: admin
+    password: "{{ ansible_password }}"
     body_format: json
     force_basic_auth: yes
   register: inventory_insert
@@ -43,8 +43,8 @@
     url: "https://localhost/api/v2/inventories/{{ new_inventory_id }}/update_inventory_sources/"
     validate_certs: no
     method: POST
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
+    user: admin
+    password: "{{ ansible_password }}"
     body_format: json
     force_basic_auth: yes
     status_code: 201

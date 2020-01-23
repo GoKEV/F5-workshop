@@ -1,4 +1,4 @@
-- hosts: ansible
+- hosts: ansibletower
   become: yes
 
   roles:

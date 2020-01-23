@@ -2,11 +2,14 @@
 - name: "Insert the credentials and sources we will need"
   include_tasks: "{{ item }}"
   with_items:
-    - insert/credential_LabVault.yml
-    - insert/credential_MachineRoot.yml
-    - insert/inventory_LabMachines.yml
+#    - insert/credential_LabVault.yml
+    - insert/credential_MachineUser.yml
+    - insert/inventory_LabMachines.yml 
     - insert/inventory_Script.yml
-    - insert/project_LimeLightTasks.yml
+#    - insert/project_LimeLightTasks.yml
+
+
+
 #    - file: insert/project_RedHatROoT-Ansible-Demos.yml
 
 #- name: Create some job templates with our lab content

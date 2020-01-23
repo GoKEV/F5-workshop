@@ -1,29 +1,12 @@
 ---
-- name: Insert the new inventory script
-  uri:
-    url: https://localhost/api/v2/inventory_scripts/
-    validate_certs: no
-    method: POST
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
-    body_format: json
-    force_basic_auth: yes
-    status_code: 201
-    body: |
-      {
-          "name": "LimeLight Lab Dynamic API",
-          "description": "This inventory source queries a database driven source via API and custom script",
-          "script": "#!/bin/sh\n\ncurl -s http://null:9999/api/myinventory/",
-          "organization": 1
-      }
-  ignore_errors: yes
-  no_log: True
-  failed_when: False
-  changed_when: False
+- name: Import the inventory
+  raw: sudo awx-manage inventory_import --source=hosts --inventory-name="Workshop Inventory"
+
+
 
 - name: Get the ID of the new inventory
   uri:
-    url: https://localhost/api/v2/inventory_scripts/?name=LimeLight%20Lab%20Dynamic%20API
+    url: https://localhost/api/v2/inventory_scripts/?name=Workshop%20Inventory
     validate_certs: no
     method: GET
     user: "{{ tower_user }}"
@@ -35,46 +18,9 @@
 - set_fact:
     new_inventoryscript_id: "{{ inventory_script_insert.json.results[0].id }}"
 
-- name: Insert the new inventory source
-  uri:
-    url: https://localhost/api/v2/inventory_sources/
-    validate_certs: no
-    method: POST
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
-    body_format: json
-    force_basic_auth: yes
-    status_code: 201
-    body: |
-      {
-          "name": "LimeLight Lab Dynamic",
-          "description": "Inventory from a script calling a dynamic API",
-          "source": "custom",
-          "source_path": "",
-          "source_script": {{ new_inventoryscript_id }},
-          "source_vars": "",
-          "credential": null,
-          "source_regions": "",
-          "instance_filters": "",
-          "group_by": "",
-          "overwrite": false,
-          "overwrite_vars": false,
-          "timeout": 0,
-          "verbosity": 1,
-          "inventory": {{ new_inventory_id }},
-          "update_on_launch": false,
-          "update_cache_timeout": 0,
-          "source_project": null,
-          "update_on_project_update": false
-      }
-  ignore_errors: yes
-  no_log: True
-  failed_when: False
-  changed_when: False
-
 - name: Get the ID of the new inventory source
   uri:
-    url: https://localhost/api/v2/inventory_sources?name=LimeLight%20Lab%20Dynamic
+    url: https://localhost/api/v2/inventory_sources?name=Workshop%20Inventory
     validate_certs: no
     method: GET
     user: "{{ tower_user }}"
