@@ -1,0 +1,4 @@
+git clone https://github.com/GoKEV/F5-workshop.git
+cd ~/F5-workshop/
+ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml 
+

@@ -24,32 +24,3 @@
   failed_when: False
   changed_when: False
 
-- name: Get the ID of the new inventory
-  uri:
-    url: https://localhost/api/v2/inventories/?name=Lab%20Instances
-    validate_certs: no
-    method: GET
-    user: admin
-    password: "{{ ansible_password }}"
-    body_format: json
-    force_basic_auth: yes
-  register: inventory_insert
-
-- set_fact:
-    new_inventory_id: "{{ inventory_insert.json.results[0].id }}"
-
-- name: "Refresh the new inventory source {{ new_inventory_id }}"
-  uri:
-    url: "https://localhost/api/v2/inventories/{{ new_inventory_id }}/update_inventory_sources/"
-    validate_certs: no
-    method: POST
-    user: admin
-    password: "{{ ansible_password }}"
-    body_format: json
-    force_basic_auth: yes
-    status_code: 201
-    body: {}
-  ignore_errors: yes
-  no_log: True
-  failed_when: False
-  changed_when: False

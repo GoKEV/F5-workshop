@@ -1,5 +1,9 @@
-- hosts: ansibletower
-  become: yes
+- hosts: control
+
+  vars:
+  - tower_user: admin
+  - tower_pass: "{{ ansible_ssh_pass }}"
+
 
   roles:
     - TowerBaseLine

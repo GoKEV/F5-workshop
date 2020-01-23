@@ -1,49 +1,24 @@
 ---
+#- name: Add tower hosts
+#  tower_host:
+#    name: localhost
+#    description: "Local Host Group"
+#    inventory: "Workshop Inventory"
+#    state: present
+#    tower_config_file: "~/networking-workshop/lab_inventory/hosts"
+#
 - name: Import the inventory
-  raw: sudo awx-manage inventory_import --source=hosts --inventory-name="Workshop Inventory"
-
-
+  shell: cd ~/networking-workshop/lab_inventory/ ; sudo awx-manage inventory_import --source=hosts --inventory-name="Workshop Inventory"
 
 - name: Get the ID of the new inventory
   uri:
     url: https://localhost/api/v2/inventory_scripts/?name=Workshop%20Inventory
     validate_certs: no
     method: GET
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
+    user: admin
+    password: "{{ ansible_ssh_pass }}"
     body_format: json
     force_basic_auth: yes
   register: inventory_script_insert
 
-- set_fact:
-    new_inventoryscript_id: "{{ inventory_script_insert.json.results[0].id }}"
 
-- name: Get the ID of the new inventory source
-  uri:
-    url: https://localhost/api/v2/inventory_sources?name=Workshop%20Inventory
-    validate_certs: no
-    method: GET
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
-    body_format: json
-    force_basic_auth: yes
-  register: inventory_script_insert
-
-- set_fact:
-    new_inventorysource_id: "{{ inventory_script_insert.json.results[0].id }}"
-
-- name: Refresh the new inventory source
-  uri:
-    url: "https://localhost/api/v2/inventory_sources/{{ new_inventorysource_id }}/update/"
-    validate_certs: no
-    method: POST
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
-    body_format: json
-    force_basic_auth: yes
-    status_code: 201
-    body: {}
-  ignore_errors: yes
-  no_log: True
-  failed_when: False
-  changed_when: False

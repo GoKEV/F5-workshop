@@ -22,7 +22,6 @@
     password: "{{ tower_pass }}"
     force_basic_auth: yes
     status_code: 202
-    ignore_errors: yes
   with_items: "{{ all_inventory.json.results }}"
   loop_control:
     label: "{{ invitem.id }}"
@@ -44,6 +43,7 @@
     body_format: json
     force_basic_auth: yes
   register: all_credentials
+  delegate_to: localhost
 
 - name: Delete ALL Credentials
   uri:
@@ -54,15 +54,14 @@
     password: "{{ tower_pass }}"
     force_basic_auth: yes
     status_code: 202
-    ignore_errors: yes
   with_items: "{{ all_credentials.json.results }}"
   loop_control:
     label: "{{ creditem.id }}"
     loop_var: creditem
-  ignore_errors: yes
-  no_log: True
-  failed_when: False
-  changed_when: False
+#  ignore_errors: yes
+#  no_log: True
+#  failed_when: False
+#  changed_when: False
 
 ### JOB TEMPLATES
 

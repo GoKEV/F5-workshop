@@ -2,8 +2,5 @@
 - name: tower_cli.cfg file
   template:
     src: templates/tower_cli.cfg
-    dest: /root/.tower_cli.cfg
-    owner: root
-    group: root
+    dest: ~/.tower_cli.cfg
     mode: '0600'
-
