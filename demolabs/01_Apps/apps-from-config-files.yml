@@ -24,6 +24,6 @@
       save: true
 
   - name: "Now check your F5 at {{ hostvars['f5']['ansible_facts']['ansible_host'] }}"
-  - debug:
+    debug:
       msg: "Log in to https://{{ hostvars['f5']['ansible_facts']['ansible_host'] }}:8443"
 
