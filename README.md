@@ -12,22 +12,22 @@ These are preconfigured projects, playbooks, credentials, job templates that bol
 
 ## Here's an example of how you could launch this process:
 <pre>
-ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/GoKEV/F5-workshop.git
+ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/GoKEV/F5-workshop.git'
 </pre>
 
 # Provision a new F5 RHPDS workshop
 * Once you receive the SSH information, connect as 'studentX' user provided.
 * From the home directory of 'studentX', clone this repo (or your forked version of it)
-`git clone https://github.com/GoKEV/F5-workshop.git`
+<pre>git clone https://github.com/GoKEV/F5-workshop.git</pre>
 
 * CD into the directory
-`cd ~/F5-workshop/`
+<pre>cd ~/F5-workshop/</pre>
 
 * Launch the playbook using the defaults as so:
-`ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml`
+<pre>ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml</pre>
 
 * Alternatively, if you clone this repo, you can pass the URL for **your** repo.  This is the repo that will be populated into Ansible Tower.
-`ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git`
+<pre>ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git</pre>
 
 
 
