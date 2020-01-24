@@ -12,47 +12,42 @@ These are preconfigured projects, playbooks, credentials, job templates that bol
 
 ## Here's an example of how you could launch this process:
 <pre>
-ansible-playbook -i tower.hosts configurify.yml
+ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/GoKEV/F5-workshop.git
 </pre>
 
-## With a hosts file called ```tower.hosts``` that looks like this:
-<pre>
+# Provision a new F5 RHPDS workshop
+* Once you receive the SSH information, connect as 'studentX' user provided.
+* From the home directory of 'studentX', clone this repo (or your forked version of it)
+`git clone https://github.com/GoKEV/F5-workshop.git`
 
-[rhpdstower]
-tower1	ansible_host=1.2.3.444 ansible_ssh_user=student1
+* CD into the directory
+`cd ~/F5-workshop/`
 
-[rhpdstower:vars]
-ansible_ssh_pass: ansible
+* Launch the playbook using the defaults as so:
+`ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml`
 
-</pre>
+* Alternatively, if you clone this repo, you can pass the URL for your repo.  This is the repo that will be populated into Ansible Tower.
+`ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git`
 
-## And a variable in the playbook to include the license file:
-## request this from https://store.ansible.com/tower/tower_license/
-## paste in the resulted key as a variable, adding the line ```"eula_accepted": true,``` at the top, as shown below:
 
-<pre>
-license_file: |
-  {
-      "eula_accepted": true,
-      "company_name": "TurnKeyDemos", 
-      "contact_email": "kev@redhat.com", 
-      "contact_name": "Kevin Holmes", 
-      "features": {
-          "activity_streams": true, 
-          "rebranding": true, 
-          "surveys": true, 
-          "system_tracking": true, 
-          "workflows": true
-      }, 
-      "hostname": "abcdefghijklmnopqrstuvexyz1234567890", 
-      "instance_count": 15, 
-      "license_date": 1234567890,
-      "license_key": "abcdefghijklmnopqrstuvexyz1234567890abcdefghijklmnopqrstuvexyz1234567890",
-      "license_type": "basic", 
-      "subscription_name": "TurnKeyDemos"
-  }
 
-</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Troubleshooting & Improvements
 
