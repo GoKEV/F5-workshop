@@ -1,9 +1,9 @@
 - hosts: control
+  serial: 1
 
   vars:
   - tower_user: admin
   - tower_pass: "{{ ansible_ssh_pass }}"
-
 
   roles:
     - TowerBaseLine

@@ -1,5 +1,44 @@
 ---
-- include: credential_MachineUser.yml
-- include: inventory_LabMachines.yml
-- include: project_this_git_repo.yml
-- include: jobtemplate_f5_01_add_app.yml
+- name: Add tower credential
+  tower_credential:
+    name: Ansible User
+    username: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    description: Non-privileged lab user account
+    organization: Default
+    kind: ssh
+    state: present
+
+- name: Add tower inventory
+  tower_inventory:
+    name: "Workshop Inventory"
+    description: "These are the instances populated automatically for you."
+    organization: Default
+    state: present
+
+- name: Import Lab Inventory
+  shell: cd ~/networking-workshop/lab_inventory ; sudo awx-manage inventory_import --source hosts --inventory-name="Workshop Inventory"
+
+- name: Add Tower Project
+  tower_project:
+    name: F5 Lab Demo
+    description: ""
+    organization: Default
+    scm_update_on_launch: True
+    state: present
+    scm_url: "{{ this_git_url }}"
+    scm_type: git
+
+- name: refresh the project
+  shell: tower-cli project update -n "F5 Lab Demo"
+
+- name: Create tower job template
+  tower_job_template:
+    name: "Manage F5 Apps"
+    job_type: "run"
+    inventory: "Workshop Inventory"
+    project: "F5 Lab Demo"
+    playbook: "demolabs/01_Apps/apps-from-config-files.yml"
+    credential: Ansible User
+    state: "present"
+
