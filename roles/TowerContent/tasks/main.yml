@@ -1,8 +1,6 @@
 ---
-- name: "Insert the credentials and sources we will need"
-  include_tasks: "{{ item }}"
-  with_items:
-#    - insert/credential_LabVault.yml
-    - insert/credential_MachineUser.yml
-    - insert/inventory_LabMachines.yml 
-    - insert/inventory_Script.yml
+- include: credential_MachineUser.yml
+- include: inventory_LabMachines.yml
+- include: inventory_Script.yml
+- include: project_this_git_repo.yml
+

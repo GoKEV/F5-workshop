@@ -1,14 +1,9 @@
 ---
-#- name: Add tower hosts
-#  tower_host:
-#    name: localhost
-#    description: "Local Host Group"
-#    inventory: "Workshop Inventory"
-#    state: present
-#    tower_config_file: "~/networking-workshop/lab_inventory/hosts"
-#
 - name: Import the inventory
   shell: cd ~/networking-workshop/lab_inventory/ ; sudo awx-manage inventory_import --source=hosts --inventory-name="Workshop Inventory"
+  tags:
+  - inventory
+  - add_stuff
 
 - name: Get the ID of the new inventory
   uri:
@@ -20,5 +15,7 @@
     body_format: json
     force_basic_auth: yes
   register: inventory_script_insert
-
+  tags:
+  - inventory
+  - add_stuff
 

@@ -1,5 +1,4 @@
 ---
-
 ### INVENTORIES
 
 - name: Get all inventory IDs
@@ -12,6 +11,9 @@
     body_format: json
     force_basic_auth: yes
   register: all_inventory
+  tags:
+  - inventory
+  - delete_stuff
 
 - name: Delete ALL Inventory
   uri:
@@ -30,6 +32,9 @@
   no_log: True
   failed_when: False
   changed_when: False
+  tags:
+  - inventory
+  - delete_stuff
 
 ### CREDENTIALS
 
@@ -44,6 +49,9 @@
     force_basic_auth: yes
   register: all_credentials
   delegate_to: localhost
+  tags:
+  - credentials
+  - delete_stuff
 
 - name: Delete ALL Credentials
   uri:
@@ -58,10 +66,13 @@
   loop_control:
     label: "{{ creditem.id }}"
     loop_var: creditem
-#  ignore_errors: yes
-#  no_log: True
-#  failed_when: False
-#  changed_when: False
+  ignore_errors: yes
+  no_log: True
+  failed_when: False
+  changed_when: False
+  tags:
+  - credentials
+  - delete_stuff
 
 ### JOB TEMPLATES
 
@@ -75,6 +86,9 @@
     body_format: json
     force_basic_auth: yes
   register: all_job_templates
+  tags:
+  - templates
+  - delete_stuff
 
 - name: Delete ALL job templates
   uri:
@@ -85,7 +99,6 @@
     password: "{{ tower_pass }}"
     force_basic_auth: yes
     status_code: 202
-    ignore_errors: yes
   with_items: "{{ all_job_templates.json.results }}"
   loop_control:
     label: "{{ jtitem.id }}"
@@ -94,6 +107,9 @@
   no_log: True
   failed_when: False
   changed_when: False
+  tags:
+  - templates
+  - delete_stuff
 
 ### PROJECTS
 
@@ -107,6 +123,9 @@
     body_format: json
     force_basic_auth: yes
   register: all_projects
+  tags:
+  - projects
+  - delete_stuff
 
 - name: Delete ALL projects
   uri:
@@ -117,7 +136,6 @@
     password: "{{ tower_pass }}"
     force_basic_auth: yes
     status_code: 202
-    ignore_errors: yes
   with_items: "{{ all_projects.json.results }}"
   loop_control:
     label: "{{ projitem.id }}"
@@ -126,4 +144,7 @@
   no_log: True
   failed_when: False
   changed_when: False
+  tags:
+  - projects
+  - delete_stuff
 
