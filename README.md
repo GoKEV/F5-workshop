@@ -26,7 +26,7 @@ ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e
 * Launch the playbook using the defaults as so:
 `ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml`
 
-* Alternatively, if you clone this repo, you can pass the URL for your repo.  This is the repo that will be populated into Ansible Tower.
+* Alternatively, if you clone this repo, you can pass the URL for **your** repo.  This is the repo that will be populated into Ansible Tower.
 `ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git`
 
 
