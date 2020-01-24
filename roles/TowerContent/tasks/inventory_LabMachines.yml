@@ -27,3 +27,29 @@
   - inventory
   - add_stuff
 
+- name: Import the inventory from text file
+  shell: cd ~/networking-workshop/lab_inventory/ ; sudo awx-manage inventory_import --source=hosts --inventory-name="Workshop Inventory"
+  tags:
+  - inventory
+  - add_stuff
+
+- name: Get the ID of the new inventory
+  uri:
+    url: https://localhost/api/v2/inventories/?name=Workshop%20Inventory
+    validate_certs: no
+    method: GET
+    user: admin
+    password: "{{ ansible_ssh_pass }}"
+    body_format: json
+    force_basic_auth: yes
+  register: inventory_insert
+  tags:
+  - inventory
+  - add_stuff
+
+- set_fact:
+    new_inventory_id: "{{ inventory_insert.json.results[0].id }}"
+  tags:
+  - inventory
+  - add_stuff
+

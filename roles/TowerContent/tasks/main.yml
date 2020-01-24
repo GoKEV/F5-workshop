@@ -1,6 +1,5 @@
 ---
 - include: credential_MachineUser.yml
 - include: inventory_LabMachines.yml
-- include: inventory_Script.yml
 - include: project_this_git_repo.yml
-
+- include: jobtemplate_f5_01_add_app.yml

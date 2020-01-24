@@ -3,8 +3,8 @@
     url: https://localhost/api/v2/job_templates/
     validate_certs: no
     method: POST
-    user: "{{ tower_user }}"
-    password: "{{ tower_pass }}"
+    user: admin
+    password: "{{ ansible_password }}"
     body_format: json
     force_basic_auth: yes
     status_code: 201
@@ -44,7 +44,7 @@
           "job_slice_count": 1,
           "credential": {{ new_machine_credential_id }},
       }
-  ignore_errors: yes
-  no_log: True
-  failed_when: False
-  changed_when: False
+#  ignore_errors: yes
+#  no_log: True
+#  failed_when: False
+#  changed_when: False
