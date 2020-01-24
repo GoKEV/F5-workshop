@@ -81,19 +81,3 @@
   ignore_errors: true
   failed_when: no
 
-
-
-
-
-
-
-
-
-
-
-- name: SAVE RUNNING CONFIGURATION
-  bigip_config:
-    provider: "{{provider}}"
-    save: true
-
-

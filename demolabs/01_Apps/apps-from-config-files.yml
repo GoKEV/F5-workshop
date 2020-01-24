@@ -11,11 +11,19 @@
     register: filenames
 
   - name: debug filenames
-    debug: 
+    debug:
       msg: "filenames are {{ filenames }}"
 
   - name: loop one filename
     include: include-bigip-deploy-app.yml my_vip_varsfile="{{ item }}"
     with_items: "{{ filenames.stdout_lines }}"
 
+  - name: SAVE RUNNING CONFIGURATION
+    bigip_config:
+      provider: "{{provider}}"
+      save: true
+
+  - name: "Now check your F5 at {{ hostvars['f5']['ansible_facts']['ansible_host'] }}"
+  - debug:
+      msg: "Log in to https://{{ hostvars['f5']['ansible_facts']['ansible_host'] }}:8443"
 
