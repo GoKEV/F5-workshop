@@ -1,4 +1,17 @@
 ---
+- name: Add Tower Project
+  tower_project:
+    name: F5 Lab Demo
+    description: ""
+    organization: Default
+    scm_update_on_launch: True
+    state: present
+    scm_url: "{{ this_git_url }}"
+    scm_type: git
+
+- name: refresh the project
+  shell: tower-cli project update -n "F5 Lab Demo"
+
 - name: Add tower credential
   tower_credential:
     name: Ansible User
@@ -18,19 +31,7 @@
 
 - name: Import Lab Inventory
   shell: cd ~/networking-workshop/lab_inventory ; sudo awx-manage inventory_import --source hosts --inventory-name="Workshop Inventory"
-
-- name: Add Tower Project
-  tower_project:
-    name: F5 Lab Demo
-    description: ""
-    organization: Default
-    scm_update_on_launch: True
-    state: present
-    scm_url: "{{ this_git_url }}"
-    scm_type: git
-
-- name: refresh the project
-  shell: tower-cli project update -n "F5 Lab Demo"
+  delegate_to: localhost
 
 - name: Create tower job template
   tower_job_template:
