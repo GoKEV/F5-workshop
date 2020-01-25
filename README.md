@@ -56,7 +56,11 @@ You will automatically be redirected to the job logging in realtime and you will
 
 <img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_tower_job_log.png">
 
-Once this playbook completes, the last line will be a debug message, telling you the IP address and login information for your Big IP virtual appliance.  Log in to the virtual appliance, then navigate to see your network traffic:
+Once this playbook completes, the last line will be a debug message, telling you the IP address and login information for your Big IP virtual appliance.  
+
+<img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_completed_login_info.png">
+
+Log in to the virtual appliance, then navigate to see your network traffic:
 * Local Traffic -> Network Map 
 
 <img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_network_traffic.png">
