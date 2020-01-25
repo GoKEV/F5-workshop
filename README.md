@@ -1,6 +1,4 @@
-[![RedHatROoT/ansible](https://avatars2.githubusercontent.com/u/2985831?s=100)](https://github.com/redhatroot/ansible/) 
-
-[![MattTheITGuru](https://avatars0.githubusercontent.com/u/22283700?s=100)](https://MattTheITGuru.com)
+[![RedHatROoT/ansible](https://avatars2.githubusercontent.com/u/2985831?s=100)](https://github.com/redhatroot/ansible/)  and  [![MattTheITGuru](https://avatars0.githubusercontent.com/u/22283700?s=100)](https://MattTheITGuru.com)
 
 
 <div style="position: absolute; top: 40px; left: 200px;">
@@ -12,7 +10,7 @@ These are preconfigured projects, playbooks, credentials, job templates that bol
 
 ## Here's an example of how you could launch this process:
 <pre>
-ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/GoKEV/F5-workshop.git'
+ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml
 </pre>
 
 # Provision a new F5 RHPDS workshop
@@ -27,7 +25,7 @@ ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e
 <pre>ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml</pre>
 
 * Alternatively, if you clone this repo, you can pass the URL for **your** repo.  This is the repo that will be populated into Ansible Tower.
-<pre>ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git</pre>
+<pre>ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git'</pre>
 
 
 # Launching the demo (work in progress, more info to follow).
@@ -38,11 +36,11 @@ ansible-playbook -i ~/networking-workshop/lab_inventory/hosts configurify.yml -e
 
 One directory below that, you'll find the directory `REPOSITORY_ROOT/demolabs/01_Apps/varfiles/` where the F5 app configuration files are stored.  The playbook looks dynamically in this directory each time it runs.
 
-<img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_tree.png">
+<img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_tree.png" width="300">
 
 Inside this directory, **only** the files named **app_** will be used.  The template file, though named in a way that it won't be discovered, provides the necessary information to create a new app, using these fields.  Please see `REPOSITORY_ROOT/demolabs/01_Apps/varfiles/template.yml` for details.
 
-<img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_template.png">
+<img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_template.png"  width="180">
 
 This project comes pre-populated with four different APP definitions:
 * app_a.yml (enabled by default)
