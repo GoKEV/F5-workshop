@@ -43,3 +43,13 @@
     credential: Ansible User
     state: "present"
 
+- name: Create tower job template
+  tower_job_template:
+    name: "Delete F5 Apps"
+    job_type: "run"
+    inventory: "Workshop Inventory"
+    project: "F5 Lab Demo"
+    playbook: "demolabs/02_DeleteApps/apps-from-config-files.yml"
+    credential: Ansible User
+    state: "present"
+
