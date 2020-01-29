@@ -10,11 +10,7 @@
     raw: ls -1 ./varfiles/app_*yml
     register: filenames
 
-  - name: debug filenames
-    debug:
-      msg: "filenames are {{ filenames }}"
-
-  - name: loop one filename
+  - name: loop each config filename
     include: include-bigip-deploy-app.yml my_vip_varsfile="{{ item }}"
     with_items: "{{ filenames.stdout_lines }}"
 
