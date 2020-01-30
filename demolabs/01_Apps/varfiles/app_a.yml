@@ -2,4 +2,4 @@
 app_poolname: AlphaPool
 app_vipname: AlphaVip
 app_portnum: '4431'
-app_exists: true
+app_exists: false

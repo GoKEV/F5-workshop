@@ -2,4 +2,4 @@
 app_poolname: CharliePool
 app_vipname: CharlieVip
 app_portnum: '4433'
-app_exists: false
+app_exists: true
