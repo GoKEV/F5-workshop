@@ -15,7 +15,7 @@
     provider: "{{provider}}"
     host: "{{hostvars[loop_create_nodes].ansible_host}}"
     name: "{{hostvars[loop_create_nodes].inventory_hostname}}"
-  loop: "{{ groups['webservers'] }}"
+  loop: "{{ groups['web'] }}"
   loop_control:
     loop_var: loop_create_nodes
   when: app_exists
@@ -37,7 +37,7 @@
     host: "{{hostvars[loop_pool_members].ansible_host}}"
     port: "80"
     pool: "{{ app_poolname }}"
-  loop: "{{ groups['webservers'] }}"
+  loop: "{{ groups['web'] }}"
   loop_control:
     loop_var: loop_pool_members
   when: app_exists
@@ -74,7 +74,7 @@
     provider: "{{provider}}"
     name: "{{hostvars[loop_del_hostvars].inventory_hostname}}"
     state: absent
-  loop: "{{ groups['webservers'] }}"
+  loop: "{{ groups['web'] }}"
   loop_control:
     loop_var: loop_del_hostvars
   when: not app_exists
