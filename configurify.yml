@@ -1,5 +1,6 @@
 - hosts: control
   serial: 1
+  become: true
 
   vars:
   - tower_user: admin
