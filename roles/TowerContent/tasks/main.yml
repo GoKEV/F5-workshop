@@ -30,7 +30,7 @@
     state: present
 
 - name: Import Lab Inventory
-  shell: cd ~/networking-workshop/lab_inventory ; sudo awx-manage inventory_import --source hosts --inventory-name="Workshop Inventory"
+  shell: cd ~/lab_inventory/ ; sudo awx-manage inventory_import --source hosts --inventory-name="Workshop Inventory"
   delegate_to: localhost
 
 - name: Create tower job template
