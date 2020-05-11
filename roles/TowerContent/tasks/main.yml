@@ -33,6 +33,8 @@
   shell: cd ~/lab_inventory/ ; sudo awx-manage inventory_import --source hosts --inventory-name="Workshop Inventory"
   delegate_to: localhost
   become: false
+  tags:
+    - sanity
 
 - name: Create tower job template
   tower_job_template:
@@ -43,6 +45,8 @@
     playbook: "demolabs/01_Apps/apps-from-config-files.yml"
     credential: Ansible User
     state: "present"
+  tags:
+    - sanity
 
 - name: Create tower job template
   tower_job_template:
@@ -53,4 +57,6 @@
     playbook: "demolabs/02_DeleteApps/apps-from-config-files.yml"
     credential: Ansible User
     state: "present"
+  tags:
+    - sanity
 
