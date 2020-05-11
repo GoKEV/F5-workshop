@@ -10,7 +10,7 @@
     scm_type: git
 
 - name: refresh the project
-  shell: tower-cli config verify_ssl false && tower-cli project update -n "F5 Lab Demo"
+  shell: tower-cli config verify_ssl false && /usr/local/bin/tower-cli project update -n "F5 Lab Demo"
 
 - name: Add tower credential
   tower_credential:
