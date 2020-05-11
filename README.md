@@ -25,7 +25,7 @@ ansible-playbook -i ~/lab_inventory/hosts configurify.yml
 <pre>ansible-playbook -i ~/lab_inventory/hosts configurify.yml</pre>
 
 * Alternatively, if you clone this repo, you can pass the URL for **your** repo.  This is the repo that will be populated into Ansible Tower.
-<pre>ansible-playbook -i ~/lab_inventory/hostss configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git'</pre>
+<pre>ansible-playbook -i ~/lab_inventory/hosts configurify.yml -e this_git_url='https://github.com/SomeOtherUser/ClonedVersionOfThisRepo.git'</pre>
 
 
 # Launching the demo (work in progress, more info to follow).
