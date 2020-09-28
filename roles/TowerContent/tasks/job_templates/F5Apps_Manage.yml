@@ -4,7 +4,7 @@
     job_type: "run"
     inventory: "Workshop Inventory"
     project: "F5 Lab Demo"
-    playbook: "LocalProjects/F5Projects/01_Manage/apps-from-config-files.yml"
+    playbook: "LocalProjects/F5Projects/01_ManageApps/apps-from-config-files.yml"
     credential: Ansible User
     state: "present"
 
