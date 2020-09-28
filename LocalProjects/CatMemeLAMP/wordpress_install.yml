@@ -7,5 +7,4 @@
     - dbhostname: "{{ hostvars['lampdb']['ansible_facts']['eth0']['ipv4']['address'] }}"
 
   roles:
-    - role: force-reg
     - role: wordpress-server

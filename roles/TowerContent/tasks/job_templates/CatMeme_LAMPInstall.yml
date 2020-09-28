@@ -1,10 +1,22 @@
 - name: Create tower job template
   tower_job_template:
-    name: "Install Wordpress LAMP Kitty Cat Site"
+    name: "Wordpress LAMP Kitty Cat Site - Reset"
     job_type: "run"
     inventory: "Workshop Inventory"
     project: "F5 Lab Demo"
     playbook: "LocalProjects/CatMemeLAMP/wordpress_install.yml"
+    extra_vars: "---\nmain_purpose: reset\nmain_message: We are resetting this server back to the state from before we installed WP."
+    limit: web
+    credential: Ansible User
+    state: "present"
+
+  tower_job_template:
+    name: "Wordpress LAMP Kitty Cat Site - Install"
+    job_type: "run"
+    inventory: "Workshop Inventory"
+    project: "F5 Lab Demo"
+    playbook: "LocalProjects/CatMemeLAMP/wordpress_install.yml"
+    limit: web
     credential: Ansible User
     state: "present"
 
