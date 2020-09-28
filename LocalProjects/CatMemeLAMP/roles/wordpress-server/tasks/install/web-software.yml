@@ -9,11 +9,12 @@
     name:
       - nano
       - unzip
-      - MySQL-python
+      - python3-PyMySQL
+      - mariadb
       - policycoreutils-python
       - httpd
       - php
       - php-mysql
-      - mariadb
     state: latest
+  ignore_errors: true
 

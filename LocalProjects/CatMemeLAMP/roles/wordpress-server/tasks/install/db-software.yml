@@ -22,9 +22,6 @@
     name:
       - nano
       - unzip
-#      - mysql-libs
-#      - MySQL-python
-#      - policycoreutils-python
       - python3-PyMySQL
       - mariadb
       - mariadb-server
