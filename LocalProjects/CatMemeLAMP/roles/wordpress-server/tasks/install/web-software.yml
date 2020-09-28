@@ -11,9 +11,8 @@
       - unzip
       - python3-PyMySQL
       - mariadb
-      - policycoreutils-python
       - httpd
       - php
-      - php-mysql
+      - php-mysqlnd
     state: latest
 
