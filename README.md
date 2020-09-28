@@ -30,15 +30,15 @@ ansible-playbook -i ~/lab_inventory/hosts configurify.yml
 
 # Launching the demo (work in progress, more info to follow).
 # Here are the basic steps
-* Navigate in Ansible Tower to Job Templates -> Manage F5 Apps.  Notice this job template has been created automatically for you in the directory of `REPOSITORY_ROOT/demolabs/01_Apps/` -- this is where the playbook is located.  
+* Navigate in Ansible Tower to Job Templates -> Manage F5 Apps.  Notice this job template has been created automatically for you in the directory of `REPOSITORY_ROOT/F5Projects/01_Apps/` -- this is where the playbook is located.  
 
 <img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_job_template.png" width="600">
 
-One directory below that, you'll find the directory `REPOSITORY_ROOT/demolabs/01_Apps/varfiles/` where the F5 app configuration files are stored.  The playbook looks dynamically in this directory each time it runs.
+One directory below that, you'll find the directory `REPOSITORY_ROOT/F5Projects/01_Apps/varfiles/` where the F5 app configuration files are stored.  The playbook looks dynamically in this directory each time it runs.
 
 <img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_tree.png" width="300">
 
-Inside this directory, **only** the files named **app_** will be used.  The template file, though named in a way that it won't be discovered, provides the necessary information to create a new app, using these fields.  Please see `REPOSITORY_ROOT/demolabs/01_Apps/varfiles/template.yml` for details.
+Inside this directory, **only** the files named **app_** will be used.  The template file, though named in a way that it won't be discovered, provides the necessary information to create a new app, using these fields.  Please see `REPOSITORY_ROOT/F5Projects/01_Apps/varfiles/template.yml` for details.
 
 <img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_template.png"  width="180">
 
@@ -52,7 +52,7 @@ Once you have added / modified the files to your desire, commit your changes and
 
 <img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_launch.png">
 
-You will automatically be redirected to the job logging in realtime and you will see the playbook creating and removing the apps, based on the criteria in the files within the directory `REPOSITORY_ROOT/demolabs/01_Apps/varfiles/`
+You will automatically be redirected to the job logging in realtime and you will see the playbook creating and removing the apps, based on the criteria in the files within the directory `REPOSITORY_ROOT/F5Projects/01_Apps/varfiles/`
 
 <img src="https://raw.githubusercontent.com/GoKEV/F5-workshop/master/screenshots/f5_tower_job_log.png">
 

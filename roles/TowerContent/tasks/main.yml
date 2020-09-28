@@ -40,7 +40,7 @@
     job_type: "run"
     inventory: "Workshop Inventory"
     project: "F5 Lab Demo"
-    playbook: "demolabs/01_Apps/apps-from-config-files.yml"
+    playbook: "F5Projects/01_Apps/apps-from-config-files.yml"
     credential: Ansible User
     state: "present"
 
@@ -50,6 +50,6 @@
     job_type: "run"
     inventory: "Workshop Inventory"
     project: "F5 Lab Demo"
-    playbook: "demolabs/02_DeleteApps/apps-from-config-files.yml"
+    playbook: "F5Projects/02_DeleteApps/apps-from-config-files.yml"
     credential: Ansible User
     state: "present"
