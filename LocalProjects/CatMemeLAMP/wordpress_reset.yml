@@ -5,8 +5,8 @@
 
   vars:
     - main_purpose: reset
-    - webhostname: "{{ hostvars['lampweb']['ansible_nodename'] }}"
-    - dbhostname: "{{ hostvars['lampdb']['ansible_facts']['eth0']['ipv4']['address'] }}"
+     - webhostname: localhost
+     - dbhostname: localhost
 
   roles:
     - role: wordpress-server

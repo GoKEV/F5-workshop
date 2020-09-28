@@ -29,7 +29,6 @@ define('DB_USER', '{{ wpdbuser }}');
 define('DB_PASSWORD', '{{ wpdbpass }}');
 
 /** MySQL hostname */
-//define('DB_HOST', '{{ hostvars['lampdb']['ansible_facts']['eth0']['ipv4']['address'] }}');
 define('DB_HOST', '{{ dbhostname }}');
 
 /** Database Charset to use in creating database tables. */
