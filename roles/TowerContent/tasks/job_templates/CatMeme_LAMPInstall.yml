@@ -11,13 +11,12 @@
 
 - name: CatMeme RESET
   tower_job_template:
-    name: "Wordpress LAMP Kitty Cat Site - Install"
+    name: "Wordpress LAMP Kitty Cat Site - Reset"
     job_type: "run"
     inventory: "Workshop Inventory"
     project: "F5 Lab Demo"
-    playbook: "LocalProjects/CatMemeLAMP/wordpress_install.yml"
+    playbook: "LocalProjects/CatMemeLAMP/wordpress_reset.yml"
     limit: web
     credential: Ansible User
-    extra_vars_path: reset.vars
     state: "present"
 
