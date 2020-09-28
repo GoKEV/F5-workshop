@@ -1,6 +1,7 @@
 ---
 - name: Deploy WordPress to lampweb and lampdb
   hosts: all
+  become: true
 
   vars:
     - webhostname: "{{ hostvars['lampweb']['ansible_nodename'] }}"
