@@ -22,9 +22,9 @@
     name:
       - nano
       - unzip
-      - mysql-libs
+#      - mysql-libs
 #      - MySQL-python
-      - policycoreutils-python
+#      - policycoreutils-python
       - mariadb
       - mariadb-server
     state: latest
