@@ -28,4 +28,3 @@
       - mariadb
       - mariadb-server
     state: latest
-    ignore_errors: true
