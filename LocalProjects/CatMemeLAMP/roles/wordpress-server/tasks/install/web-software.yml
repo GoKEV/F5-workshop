@@ -16,5 +16,4 @@
       - php
       - php-mysql
     state: latest
-  ignore_errors: true
 
