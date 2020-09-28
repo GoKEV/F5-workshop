@@ -18,8 +18,7 @@
     username: "{{ ansible_user }}"
     password: "{{ ansible_password }}"
     ssh_key_data: ~/.ssh/aws-private.pem
-
-    description: Non-privileged lab user account
+    description: Lab user account from workshop credentials
     organization: Default
     kind: ssh
     state: present
