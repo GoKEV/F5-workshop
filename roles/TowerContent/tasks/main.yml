@@ -34,22 +34,7 @@
   delegate_to: localhost
   become: false
 
-- name: Create tower job template
-  tower_job_template:
-    name: "Manage F5 Apps"
-    job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "F5 Lab Demo"
-    playbook: "LocalProjects/F5Projects/01_Apps/apps-from-config-files.yml"
-    credential: Ansible User
-    state: "present"
+- name: Job Templates from imported content
+  include_tasks: '{{ item }}'
+  loop: "{{ lookup('fileglob'  'job_templates/*.yml' ) }}"
 
-- name: Create tower job template
-  tower_job_template:
-    name: "Delete F5 Apps"
-    job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "F5 Lab Demo"
-    playbook: "LocalProjects/F5Projects/02_DeleteApps/apps-from-config-files.yml"
-    credential: Ansible User
-    state: "present"
