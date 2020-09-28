@@ -1,4 +1,4 @@
-- name: Create tower job template
+- name: CatMeme RESET
   tower_job_template:
     name: "Wordpress LAMP Kitty Cat Site - Reset"
     job_type: "run"
@@ -10,6 +10,7 @@
     credential: Ansible User
     state: "present"
 
+- name: CatMeme INSTALL
   tower_job_template:
     name: "Wordpress LAMP Kitty Cat Site - Install"
     job_type: "run"
