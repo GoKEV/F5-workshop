@@ -22,8 +22,10 @@
     name:
       - nano
       - unzip
-      - MySQL-python
+      - mysql-libs
+#      - MySQL-python
       - policycoreutils-python
       - mariadb
       - mariadb-server
     state: latest
+    ignore_errors: true
