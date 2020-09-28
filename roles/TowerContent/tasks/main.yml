@@ -36,5 +36,5 @@
 
 - name: Job Templates from imported content
   include_tasks: '{{ item }}'
-  loop: "{{ lookup('fileglob'  'job_templates/*.yml' ) }}"
-
+  with_fileglob:
+    - "job_templates/*.yml"
