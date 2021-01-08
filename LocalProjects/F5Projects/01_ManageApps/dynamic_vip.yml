@@ -20,17 +20,17 @@
           - validate_certs: false
 
 
-    - name: Add node
-        bigip_node:
-        host: 10.20.30.40
-        name: 10.20.30.40
-        provider: "{{ provider }}"
+#    - name: Add node
+#        bigip_node:
+#          host: 10.20.30.40
+#          name: 10.20.30.40
+#          provider: "{{ provider }}"
 #          server: "{{ hostvars['f5']['ansible_host'] }}"
 #          user: admin
 #          password: aFhEUfljztgfaQ
 #          server_port: "8443"
 #          validate_certs: false
-      delegate_to: localhost
+#      delegate_to: localhost
 
     - name: CREATE NODES
       bigip_node:
