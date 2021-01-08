@@ -66,14 +66,14 @@
         provider: "{{provider}}"
         name: "{{ app_vipname }}"
         state: absent
-      when: not app_exists
+      when: ! app_exists
 
     - name: "DELETE POOL {{ app_poolname }}"
       bigip_pool:
         provider: "{{provider}}"
         name: "{{ app_poolname }}"
         state: absent
-      when: not app_exists
+      when: ! app_exists
 
     - name: DELETE NODES
       bigip_node:
@@ -83,7 +83,7 @@
       loop: "{{ groups['web'] }}"
       loop_control:
         loop_var: loop_del_hostvars
-      when: not app_exists
+      when: ! app_exists
       ignore_errors: true
       failed_when: no
 
