@@ -24,7 +24,7 @@
       delegate_to: localhost
       loop_control:
         loop_var: loop_create_nodes
-      when: app_exists
+      when: app_exists == 'True'
 
     - name: "CREATE POOL {{ app_poolname }}"
       bigip_pool:
@@ -33,7 +33,7 @@
         lb_method: "round-robin"
         monitors: "/Common/http"
         monitor_type: "and_list"
-      when: app_exists
+      when: app_exists == 'True'
 
     - name: "ADD POOL MEMBERS to {{ app_poolname }}"
       bigip_pool_member:
@@ -46,7 +46,7 @@
       loop: "{{ groups['web'] }}"
       loop_control:
         loop_var: loop_pool_members
-      when: app_exists
+      when: app_exists == 'True'
 
     - name: "CREATE VIRTUAL SERVER {{ app_vipname }}"
       bigip_virtual_server:
@@ -58,7 +58,7 @@
         all_profiles: ['http', 'clientssl', 'oneconnect']
         pool: "{{ app_poolname }}"
         snat: "Automap"
-      when: app_exists
+      when: app_exists == 'True'
 
 ## DELETE GOES BELOW HERE
     - name: "DELETE VIRTUAL SERVER {{ app_vipname }}"
@@ -66,14 +66,14 @@
         provider: "{{provider}}"
         name: "{{ app_vipname }}"
         state: absent
-      when: ! app_exists
+      when: app_exists == 'False'
 
     - name: "DELETE POOL {{ app_poolname }}"
       bigip_pool:
         provider: "{{provider}}"
         name: "{{ app_poolname }}"
         state: absent
-      when: ! app_exists
+      when: app_exists == 'False'
 
     - name: DELETE NODES
       bigip_node:
@@ -83,7 +83,7 @@
       loop: "{{ groups['web'] }}"
       loop_control:
         loop_var: loop_del_hostvars
-      when: ! app_exists
+      when: app_exists == 'False'
       ignore_errors: true
       failed_when: no
 
