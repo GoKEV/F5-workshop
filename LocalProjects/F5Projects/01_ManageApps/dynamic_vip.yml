@@ -16,6 +16,7 @@
           validate_certs: "no"
 
     - name: CREATE NODES
+      delgate_to: localhost
       bigip_node:
         provider: "{{ provider }}"
         host: "{{ hostvars[loop_create_nodes].ansible_host }}"
