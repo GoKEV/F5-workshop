@@ -20,7 +20,7 @@
         host: 10.20.30.40
         name: 10.20.30.40
         provider:
-          server: lb.mydomain.com
+          server: {{ hostvars['f5']['ansible_host'] }}
           user: admin
           password: aFhEUfljztgfaQ
       delegate_to: localhost
