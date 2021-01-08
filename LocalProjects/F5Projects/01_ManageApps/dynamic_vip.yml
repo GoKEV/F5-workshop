@@ -15,6 +15,16 @@
           server_port: "8443"
           validate_certs: "no"
 
+    - name: Add node
+      bigip_node:
+        host: 10.20.30.40
+        name: 10.20.30.40
+        provider:
+          server: lb.mydomain.com
+          user: admin
+          password: aFhEUfljztgfaQ
+      delegate_to: localhost
+
     - name: CREATE NODES
       bigip_node:
         provider: "{{ provider }}"
