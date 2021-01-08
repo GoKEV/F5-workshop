@@ -16,12 +16,12 @@
           validate_certs: "no"
 
     - name: CREATE NODES
-      delgate_to: localhost
       bigip_node:
         provider: "{{ provider }}"
         host: "{{ hostvars[loop_create_nodes].ansible_host }}"
         name: "{{ hostvars[loop_create_nodes].inventory_hostname }}"
       loop: "{{ groups['web'] }}"
+      delegate_to: localhost
       loop_control:
         loop_var: loop_create_nodes
       when: app_exists
