@@ -6,15 +6,6 @@
   serial: 1
 
   tasks:
-    - name: Setup provider
-      set_fact:
-        provider:
-          server: "{{ vip_private_ip }}"
-          user: "{{ ansible_user }}"
-          password: "{{ ansible_ssh_pass }}"
-          server_port: "8443"
-          validate_certs: "no"
-
     - name: Add node
       bigip_node:
         host: 10.20.30.40
@@ -23,6 +14,7 @@
           server: "{{ hostvars['f5']['ansible_host'] }}"
           user: admin
           password: aFhEUfljztgfaQ
+          server_port: "8443"
       delegate_to: localhost
 
     - name: CREATE NODES
