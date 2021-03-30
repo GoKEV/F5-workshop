@@ -1,4 +1,4 @@
-Currently maintained by [![GoKEV](https://avatars2.githubusercontent.com/u/2985831?s=100)](https://github.com/redhatroot/ansible/)  and   [![MattTheITGuru](https://avatars0.githubusercontent.com/u/22283700?s=100)](https://MattTheITGuru.com)
+Currently maintained by [![GoKEV](https://avatars2.githubusercontent.com/u/2985831?s=100)](https://github.com/redhatroot/ansible/)
 
 
 <div style="position: absolute; top: 40px; left: 200px;">
