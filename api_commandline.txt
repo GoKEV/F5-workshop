@@ -1,0 +1,2 @@
+curl -kH 'Content-Type: application/json' -H "Authorization: Bearer GB03gzNzx2u2xlhsCkXyACe4AwKIg2" -XPOST -d '{"extra_vars": "{\"app_poolname\": \"MyPool\" , \"app_portnum\": \"80\" , \"app_vipname\": \"MyVIP\" , \"app_exists\": True}"}' https://student1.GUID.open.redhat.com/api/v2/job_templates/17/launch/
+
