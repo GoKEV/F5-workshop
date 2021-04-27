@@ -23,7 +23,7 @@
 
     - name: POOLS
       bigip_pool:
-        name: "{{ item.poolname }}"
+        name: "{{ item.pool }}"
         lb_method: "{{ item.lb_method }}"
         monitors: "{{ item.monitors }}"
         monitor_type: "{{ item.monitor_type }}"
@@ -36,7 +36,7 @@
         host: "{{ item.ip }}"
         name: "{{ item.hostname }}"
         host: "{{ item.port }}"
-        name: "{{ item.poolname }}"
+        name: "{{ item.pool }}"
       loop: "{{ f5_nodes }}"
 #      loop_control:
 #        loop_var: loop_pool_members
