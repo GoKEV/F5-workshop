@@ -11,25 +11,26 @@
       set_fact:
         split_server_names: "{{ server_names.split() }}"
 
-    - name: CREATE NODES
+    - name: NODES
       bigip_node:
         host: "{{ item.ip }}"
         name: "{{ item.hostname }}"
       loop: "{{ f5_nodes }}"
       delegate_to: localhost
-      loop_control:
-        loop_var: loop_create_nodes
-      when: app_exists == 'True'
+#      loop_control:
+#        loop_var: loop_create_nodes
+#      when: app_exists == 'True'
 
-    - name: "CREATE POOL {{ app_poolname }}"
+    - name: POOLS
       bigip_pool:
-        name: "{{ app_poolname }}"
-        lb_method: "round-robin"
-        monitors: "/Common/http"
-        monitor_type: "and_list"
-      when: app_exists == 'True'
+        name: "{{ item.poolname }}"
+        lb_method: "{{ item.lb_method }}"
+        monitors: "{{ item.monitors }}"
+        monitor_type: "{{ item.monitor_type }}"
+      loop: "{{ f5_pools }}"
+#      when: app_exists == 'True'
 
-    - name: "ADD POOL MEMBERS to {{ app_poolname }}"
+    - name: POOL MEMBERS
       bigip_pool_member:
         state: "present"
         host: "{{ item.ip }}"
@@ -37,45 +38,18 @@
         host: "{{ item.port }}"
         name: "{{ item.poolname }}"
       loop: "{{ f5_nodes }}"
-      loop_control:
-        loop_var: loop_pool_members
-      when: app_exists == 'True'
+#      loop_control:
+#        loop_var: loop_pool_members
+#      when: app_exists == 'True'
 
-    - name: "CREATE VIRTUAL SERVER {{ app_vipname }}"
+    - name: VIP
       bigip_virtual_server:
-        name: "{{ app_vipname }}"
-        destination: "{{ vip_private_ip }}"
-        port: "{{ app_portnum }}"
-        enabled_vlans: "all"
+        name: "{{ item.vipname }}"
+        destination: "{{ item.priv_ip }}"
+        port: "{{ item.port }}"
+        enabled_vlans: "{{ item.vlans }}"
         all_profiles: ['http', 'clientssl', 'oneconnect']
-        pool: "{{ app_poolname }}"
+        pool: "{{ item.pool }}"
         snat: "Automap"
-      when: app_exists == 'True'
+#      when: app_exists == 'True'
 
-## DELETE GOES BELOW HERE
-    - name: "DELETE VIRTUAL SERVER {{ app_vipname }}"
-      bigip_virtual_server:
-        name: "{{ app_vipname }}"
-        state: absent
-      when: app_exists == 'False'
-
-    - name: "DELETE POOL {{ app_poolname }}"
-      bigip_pool:
-        name: "{{ app_poolname }}"
-        state: absent
-      when: app_exists == 'False'
-
-    - name: DELETE NODES
-      bigip_node:
-        name: "{{hostvars[loop_del_hostvars].inventory_hostname}}"
-        state: absent
-      loop: "{{ groups['web'] }}"
-      loop_control:
-        loop_var: loop_del_hostvars
-      when: app_exists == 'False'
-      ignore_errors: true
-      failed_when: no
-
-    - name: "Now check your F5 at {{ hostvars['f5']['ansible_host'] }}"
-      debug:
-        msg: "Now, log in to the F5 virtual appliance at https://{{ hostvars['f5']['ansible_host'] }}:8443    username: admin     password: {{ hostvars['f5']['ansible_ssh_pass'] }}     THEN NAVIGATE TO: Local Traffic --> Network Map and see details for pool {{ app_poolname }}"
