@@ -40,7 +40,6 @@
       loop: "{{ f5_nodes }}"
 #      loop_control:
 #        loop_var: loop_pool_members
-#      when: app_exists == 'True'
 
     - name: VIP
       bigip_virtual_server:
@@ -51,5 +50,5 @@
         all_profiles: ['http', 'clientssl', 'oneconnect']
         pool: "{{ item.pool }}"
         snat: "Automap"
-#      when: app_exists == 'True'
+      loop: "{{ f5_vips }}"
 
